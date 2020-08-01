@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    {# bootstrap #}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <title>Diary Portal</title>
+  </head>
+  <body>
+
+    {% if user.is_authenticated %}
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg mynav" role="navigation" id="navbar">
+        <div class="container">
+          <ul class="navbar-nav ml-auto">
+            {% if user.last_name == 'PLACEMENT' %}
+              <li class="nav-item"> <a class="nav-link" href="{% url 'placement_list' %}">Placements</a> </li>
+            {% endif %}
+            <li class="nav-item"> <a class="nav-link" href="{% url 'intern_list' %}">Internships</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        {% block content %}{% endblock  %}
+      </div>
+
+    {% else %}
+      {% include "diary/sorry.html" %}
+    {% endif %}
+
+    {# bootstrap #}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

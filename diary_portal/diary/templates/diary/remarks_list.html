@@ -1,0 +1,49 @@
+{% extends "diary/base.html" %}
+{% load custom_tags %}
+
+{% block content %}
+  {% setvar "True" as ok %}
+
+  {% for rem in object_list %}
+
+      {% if ok == "True" %}
+        <h2>{{rem.company.CompanyName}}</h2>
+        <div class="row">
+          <div class="col-md-3">
+            <h3>POC</h3>
+          </div>
+          <div class="col-md-3">
+            <h3>CPOC</h3>
+          </div>
+          <div class="col-md-3">
+            <h3>Remark</h3>
+          </div>
+          <div class="col-md-3">
+            <h3>Date and Time</h3>
+          </div>
+        </div>
+        <br>
+        {% setvar "False" as ok %}
+      {% endif %}
+
+      <div class="row">
+        <div class="col-md-3">
+          {{rem.POC}}
+        </div>
+        <div class="col-md-3">
+          {{rem.CPOC}}
+        </div>
+        <div class="col-md-3">
+          {{rem.remark}}
+        </div>
+        <div class="col-md-3">
+          {{rem.datetime}}
+        </div>
+      </div>
+  {% empty %}
+    <h1>No Remarks Made Yet!</h1>
+  {% endfor %}
+
+  <a href="{% url 'create_remark' %}">Add new Remark!</a>
+
+{% endblock  %}

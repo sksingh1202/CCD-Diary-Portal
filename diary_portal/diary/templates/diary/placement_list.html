@@ -1,0 +1,54 @@
+{% extends "diary/base.html" %}
+
+{% block content %}
+
+  {% if user.last_name == "PLACEMENT" %}
+
+    <div class="row">
+      <div class="col-md-3">
+        <h3>Company Name</h3>
+      </div>
+      <div class="col-md-2">
+        <h3>POC</h3>
+      </div>
+      <div class="col-md-2">
+        <h3>CPOC</h3>
+      </div>
+      <div class="col-md-3">
+        <h3>Remark</h3>
+      </div>
+      <div class="col-md-2">
+        <h3>View and Add remarks</h3>
+      </div>
+    </div>
+
+    {% for company in object_list %}
+
+      {% if company.placement == True %}
+        <div class="row">
+          <div class="col-md-3">
+            {{company.CompanyName}}
+          </div>
+          <div class="col-md-2">
+            {{company.POC}}
+          </div>
+          <div class="col-md-2">
+            {{company.CPOC}}
+          </div>
+          <div class="col-md-3">
+            {{company.TopRemark}}
+          </div>
+          <div class="col-md-2">
+            <a href="{% url 'remark_list' pk=company.pk %}">View Remarks</a>
+            <a href="{% url 'create_remark' %}">Add Remark</a>
+          </div>
+        </div>
+      {% endif %}
+
+    {% endfor %}
+
+  {% else %}
+    {% include "diary/sorry.html" %}
+  {% endif %}
+
+{% endblock  %}
